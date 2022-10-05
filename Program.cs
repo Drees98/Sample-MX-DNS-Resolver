@@ -45,19 +45,19 @@ public class MainClass{
                 foreach (var MxRecord in result.Answers.MxRecords())
                 {
 
-                    // Prints the exchange name to show multithreading
-                    Console.Write("{0}: ", MxRecord.Exchange);
+                    // Queries again using the mail server domain name
                     var result2 = client.Query(MxRecord.Exchange.ToString(), QueryType.A);
                     foreach (var ARecord in result2.Answers.ARecords())
                     {
 
-                        // Prints the resolved IP
-                        Console.WriteLine(ARecord.Address);
+                        // Prints the Domain name and resolved IP
+                        Console.WriteLine("{0}: {1}", ARecord.DomainName ,ARecord.Address);
                     }
                 }
             });
 
-            // Continues the loop
+            // Continues the loop and adds space between the loops in console
+            Console.WriteLine("");
             domains = Console.ReadLine();
         }
     }
